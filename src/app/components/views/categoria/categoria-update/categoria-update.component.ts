@@ -4,11 +4,11 @@ import { Categoria } from '../categoria.model';
 import { CategoriaService } from '../categoria.service';
 
 @Component({
-  selector: 'app-categoria-delete',
-  templateUrl: './categoria-delete.component.html',
-  styleUrls: ['./categoria-delete.component.css']
+  selector: 'app-categoria-update',
+  templateUrl: './categoria-update.component.html',
+  styleUrls: ['./categoria-update.component.css']
 })
-export class CategoriaDeleteComponent implements OnInit {
+export class CategoriaUpdateComponent implements OnInit {
 
   categoria: Categoria = {
     id: '',
@@ -18,7 +18,7 @@ export class CategoriaDeleteComponent implements OnInit {
 
   constructor( 
     private service: CategoriaService, 
-    private route: ActivatedRoute, 
+    private route: ActivatedRoute,
     private router: Router 
   ) { }
 
@@ -31,17 +31,16 @@ export class CategoriaDeleteComponent implements OnInit {
     this.service.findById( this.categoria.id! ).subscribe( (resposta) => {
       this.categoria.nome = resposta.nome;
       this.categoria.descricao = resposta.descricao;
-      console.log(this.categoria);
     } )
   }
 
-  delete(): void {
-    this.service.delete( this.categoria.id! ).subscribe( (resposta) => {
+  update(): void {
+    this.service.update( this.categoria ).subscribe( (resposta) => {
       this.router.navigate(['categorias']);
-      this.service.mensagem('Categoria deletada com sucesso!');
+      this.service.mensagem('Categoria atualizada com sucesso!');
     }, err => {
-      this.service.mensagem(err.error.error);
-    } )
+      this.service.mensagem('Validar se todos os campos estão preenchidos corretamente.');
+    } );
   }
 
   cancel(): void {
