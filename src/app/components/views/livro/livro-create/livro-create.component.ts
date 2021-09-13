@@ -21,7 +21,7 @@ export class LivroCreateComponent implements OnInit {
   }
 
   titulo     = new FormControl( "", [Validators.minLength(3)] );
-  nomeAutor = new FormControl( "", [Validators.minLength(3)] );
+  nomeAutor  = new FormControl( "", [Validators.minLength(3)] );
   texto      = new FormControl( "", [Validators.minLength(10)] );
 
   constructor(
